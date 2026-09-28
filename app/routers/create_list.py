@@ -1,19 +1,16 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter
 
 from app.schemas import Note, NoteCreate
+from app.services.create_list import create_note, list_notes
 
 create_list_router = APIRouter()
 
 
 @create_list_router.post("/notes", status_code=201)
-def create_note(payload: NoteCreate) -> Note:
-    raise HTTPException(
-        status_code=501, detail="Notizen anlegen und auflisten (#3) implementiert diesen Endpunkt"
-    )
+def post_note(payload: NoteCreate) -> Note:
+    return create_note(payload)
 
 
 @create_list_router.get("/notes")
-def list_notes(tag: str | None = None) -> list[Note]:
-    raise HTTPException(
-        status_code=501, detail="Notizen anlegen und auflisten (#3) implementiert diesen Endpunkt"
-    )
+def get_notes(tag: str | None = None) -> list[Note]:
+    return list_notes(tag)
