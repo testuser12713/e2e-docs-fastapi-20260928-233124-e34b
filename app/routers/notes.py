@@ -1,7 +1,7 @@
 from fastapi import APIRouter, HTTPException
 
 from app.schemas import Note
-from app.service import note_store
+from app.store import note_store
 
 notes_router = APIRouter()
 

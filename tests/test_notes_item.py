@@ -5,7 +5,7 @@ from fastapi.testclient import TestClient
 
 from app.main import create_app
 from app.schemas import Note
-from app.service import note_store
+from app.store import note_store
 
 
 @pytest.fixture(autouse=True)
