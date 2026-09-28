@@ -2,7 +2,7 @@ from fastapi import FastAPI
 
 from app.config import Settings
 from app.routers.create_list import create_list_router
-from app.routers.notes_item import notes_item_router
+from app.routers.notes import notes_router
 
 
 def create_app() -> FastAPI:
@@ -13,7 +13,7 @@ def create_app() -> FastAPI:
         return {"status": "ok", "app_name": Settings().app_name}
 
     app.include_router(create_list_router)
-    app.include_router(notes_item_router)
+    app.include_router(notes_router)
     return app
 
 

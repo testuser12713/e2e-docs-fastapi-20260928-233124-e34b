@@ -2,7 +2,7 @@ from fastapi.testclient import TestClient
 
 from app.main import create_app
 from app.routers.create_list import create_list_router
-from app.routers.notes_item import notes_item_router
+from app.routers.notes import notes_router
 
 
 def test_health_returns_status_ok_and_configured_app_name():
@@ -27,10 +27,10 @@ def test_all_four_note_routes_are_registered():
     # registration (path + verb) structurally instead of via a status code.
     registered = {
         (route.path, frozenset(route.methods))
-        for router in (create_list_router, notes_item_router)
+        for router in (create_list_router, notes_router)
         for route in router.routes
     }
     assert ("/notes", frozenset({"POST"})) in registered
     assert ("/notes", frozenset({"GET"})) in registered
-    assert ("/notes/{note_id}", frozenset({"GET"})) in registered
-    assert ("/notes/{note_id}", frozenset({"DELETE"})) in registered
+    assert ("/notes/{note_id:int}", frozenset({"GET"})) in registered
+    assert ("/notes/{note_id:int}", frozenset({"DELETE"})) in registered
